@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Prática 2º Bimestre</title>
+    <style>
+        body{
+            background-color: #292c33;
+            color: aliceblue;
+            font:normal 12pt arial;
+        }
+        h1{
+            color: rgb(116, 35, 113);
+        }
+        p{
+            color: rgb(233, 165, 76);
+        }
+    </style>
+</head>
+<body>
+    <h1>Avaliação Prática 2º Bimestre</h1>   
+    <p>Comandos executados neste programa:</p>
+    <p>- Quantidade de pessoas do sexo Masculino</p>
+    <p>- Percentual de pessoas do sexo Feminino e Outros </p>
+    <p>- Média de idade dos Homens</p>
+    <p>- Nome da Mulher mais idosa</p>
+    <p>- Média geral de idade</p>
+    <p>- Percentual de pessoas com idade acima de 50 anos</p>
+    <p>- Quantidade de erros que o usuário cometeu ao digitar os dados</p>
+    <p>- Nome e idade da pessoa mais nova. Caso haja pessoas com idades iguais, mostrar apenas a primeira delas.</p>
+    <p>- Média de caracteres dos nomes (apenas mulheres)</p>
+    <p>- Menor nome (em ordem alfabética)</p>
+    <p>- Maior nome (em quantidade de caracteres)</p>
+    <script>
+        var nome=[];
+        var idade=[];
+        var sexo=[];
+        var qtdh=0;
+        var pctmo=0;
+        var mih=0;
+        var mmi=0;
+        var mgi=0;
+        var pctpa50=0;
+        var qtde=0;
+        var mmv=0;
+        var idmn=75;
+        var qtdc=0;
+        var qtdm=0;
+        var maiornome=0;
+        alert("Preencha o prompts à seguir de acordo.");       
+        for(var x=0; x<6; x++){
+            document.write(`PESSOA ${x+1}<br>`);
+            nome[x]=(prompt(`Digite o ${x+1}º nome:`));
+            if(nome[x].length>maiornome){
+                maiornome=nome[x].length;
+                mn=nome[x];
+            }
+            document.write(`Nome:${nome[x]}<br>`);
+            do {
+            idade[x]=Number.parseInt(prompt(`Digite a ${x + 1}ª idade (18-75):`));
+                if (idade[x]>=18 && idade[x]<=75) {
+                    idadeValida=true;
+                } else {
+                    qtde++;
+                    idadeValida=false;
+                }
+            } while (!idadeValida);
+            if(idade[x]>50){
+                pctpa50++;
+            }
+            if(idade[x]<idmn){
+                idmn=idade[x];
+                pmn=nome[x];
+            }
+            document.write(`Idade:${idade[x]}<br>`);
+            do{
+            sexo[x]=(prompt(`Digite o sexo(M/F/O):`))
+                if(sexo[x]=="M" || sexo[x]=="F" || sexo[x]=="O"){
+                    sexovalido=true;
+                }else{
+                    qtde++;
+                    sexovalido=false;
+                }
+            }while(!sexovalido);
+            if(sexo[x]=="M"){
+                qtdh++;
+                mih=mih+idade[x];
+            }else{
+                pctmo++;
+            }
+            if(sexo[x]=="F"){     
+                if(idade[x]>mmv){
+                    mmv=idade[x];
+                    nomemmv=nome[x];
+                } 
+                qtdm++;
+                qtdc=qtdc+nome[x].length;        
+            }
+            document.write(`Sexo:${sexo[x]}<br><br>`);
+            mgi=mgi+idade[x];
+        }
+        nome.sort();
+        menornome=nome[0];
+        mih=mih/qtdh;
+        pctmo=(pctmo*100)/6;
+        mgi=mgi/6;
+        pctpa50=(pctpa50*100)/6;
+        qtdc=qtdc/qtdm;
+        document.write(`A quantidades de pessoas do sexo Masculino é:${qtdh}<br><br>`);
+        document.write(`O percentual de pessoas do sexo Feminino e Outros é:${pctmo}% <br><br>`);
+        document.write(`A média de idade dos Homens é:${mih}<br><br>`);
+        document.write(`O nome da Mulher mais idosa é:${nomemmv}<br><br>`);
+        document.write(`A média geral de idade é:${mgi} anos<br><br>`);
+        document.write(`O percentual de pessoas com idade acima de 50 anos é:${pctpa50}% <br><br>`);
+        document.write(`A quantidade de erros que o usuário cometeu ao digitar os dados foi de:${qtde}<br><br>`);
+        document.write(`O nome e idade da pessoa mais nova é:${pmn}, ${idmn} anos<br><br>`);
+        document.write(`A média de caracteres dos nomes femininos é:${qtdc} caracteres<br><br>`);
+        document.write(`O menor nome (em ordem alfabética) é:${menornome}<br><br>`);
+        document.write(`O maior nome (em quantidade de caracteres) é:${mn}<br><br>`);
+    </script>
+</body>
+</html>
